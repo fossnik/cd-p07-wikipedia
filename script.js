@@ -8,14 +8,15 @@ $(document).ready(function() {
 			url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + queryTextInput,
 			// data: queryData,
 			dataType: 'jsonp',
-			type: 'POST',
-			// type: 'GET',
+			// type: 'POST',
+			type: 'GET',
 			headers: { 'Api-User-Agent': 'Example/1.0' },
 			success: function(responseData) {
-				// var pages = responseData.query.pages;
-				console.log(responseData);
-				// $.each(pages, function(index, source){
-				// console.log(pages[index]);
+				var pages = responseData.query.pages;
+				console.log(pages);
+				$.each(pages, function(index, title){
+									console.log(pages[index].title);
+								})
 				// var sources = response.sources;
 				// var html =  '<select class="form-control" id="source">';
 				// var pagesUL = document.querySelector('ul');
