@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
 	var queryButton = document.getElementById('queryButton');
+	// element to post results on
+	var pagesUL = document.querySelector('ul');
 
 	queryButton.addEventListener('click', function() {
 		var queryTextInput = document.getElementById('queryText').value;
@@ -13,17 +15,16 @@ $(document).ready(function() {
 			headers: { 'Api-User-Agent': 'Example/1.0' },
 			success: function(responseData) {
 				var pages = responseData.query.pages;
-				console.log(pages);
-				$.each(pages, function(index, title){
-									console.log(pages[index].title);
-								})
-				// var sources = response.sources;
-				// var html =  '<select class="form-control" id="source">';
-				// var pagesUL = document.querySelector('ul');
-				// pagesUL.innerHTML = '';
-				// $.each(sources, function(index, responseData){
-				// 	pagesUL.appendChild(responseData.sources);
-			}
-		});  // End of ajax
-	}) // End of Event Listener
+				var htmlA = "<ul id='list'>";
+				$.each(pages, function(index, page){
+					console.log(pages[index].title);
+					var title = page.title;
+					var description = page.id;
+
+					htmlA += '<p>' + title + '</p>';
+					$(".queryResult").html(htmlA);
+				})
+			}	// End of Success
+		});	// End of ajax
+	})	// End of Event Listener
 });
