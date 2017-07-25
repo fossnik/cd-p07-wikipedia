@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Project #7: FCCIntermediate Wiki-Viewer</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 </head>
 <body>
 
@@ -13,18 +13,18 @@
   </div>
 
   <div>
-    <button onclick="handlers.queryWiki()">Query Wikipedia</button>
+    <button onclick="queryWiki()">Query Wikipedia</button>
     <input id="queryText" type="text">
   </div>
 
-  <div id=class="container">
-    <p id="queryResults"></p>
+  <div class="container">
+    <p id="queryResult"></p>
   </div>
 
 </body>
 <footer>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- <script src="js/script.js"></script> -->
+  <script src="script.js"></script>
   <hr style="width: 70%">
   <div style="font-family: monospace; text-align: center"><a href="http://intracitygeeks.org/">CareerDevs</a> of Providence, RI</div>
 </footer>
