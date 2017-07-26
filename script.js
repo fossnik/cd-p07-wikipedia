@@ -1,30 +1,47 @@
 $(document).ready(function() {
-
-	var queryButton = document.getElementById('queryButton');
-	// element to post results on
-	var pagesUL = document.querySelector('ul');
-
-	queryButton.addEventListener('click', function() {
+/*
+	var endpointURL = 'https://en.wikipedia.org/w/api.php';
+	var apiParams = '?format=json\
+&action=query\
+&generator=search\
+&gsrnamespace=0\
+&gsrlimit=10\
+&prop=pageimages|extracts\
+&pilimit=max\
+&exintro\
+&explaintext\
+&exsentences=1\
+&exlimit=max\
+&gsrsearch=';
+*/
+	$("#queryWiki").submit(function(event) {
+		event.preventDefault(); // prevents page reloading or something
 		var queryTextInput = document.getElementById('queryText').value;
-		$.ajax( { // Using jQuery useragent on WikiAPI
-			url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + queryTextInput,
-			// data: queryData,
-			dataType: 'jsonp',
-			// type: 'POST',
+		var apiParams = { action: 'query',
+										generator: 'search',
+										gsrsearch: queryTextInput,
+										format: 'json',
+										prop: 'extracts|pageimages',
+									};
+		$.ajax( {
 			type: 'GET',
-			headers: { 'Api-User-Agent': 'Example/1.0' },
+			dataType: 'jsonp',
+			url: '//en.wikipedia.org/w/api.php',
+  		data: apiParams,
 			success: function(responseData) {
 				var pages = responseData.query.pages;
-				var htmlA = "<ul id='list'>";
+				var htmlHead = '<div class="well">';
+				var htmlTail = '</div>';
 				$.each(pages, function(index, page){
-					console.log(pages[index].title);
 					var title = page.title;
-					var description = page.id;
-
-					htmlA += '<p>' + title + '</p>';
-					$(".queryResult").html(htmlA);
-				})
-			}	// End of Success
-		});	// End of ajax
-	})	// End of Event Listener
-});
+					var extract = page.extract;
+					console.log(page);
+					// build HTML for injection into index.html
+					htmlHead += '<p><button><em>' + title + '</em><br>' + extract + '</button>';
+					// htmlHead += '<button type="button" class="btn" onclick="location.href=' + https://en.wikipedia.org/wiki/Special:Random'">Random</button>
+					$("#queryResult").html(htmlHead + htmlTail);
+				})	// End of $.each
+			}	// End of success:
+		});	// End of $.ajax
+	})	// End of Event Listener #queryWiki
+});	// End of $(document).ready()
