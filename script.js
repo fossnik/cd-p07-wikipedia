@@ -26,6 +26,7 @@ $(document).ready(function() {
 											exintro: true,
 											explaintext: true,
 											prop: 'extracts',
+											gsrlimit: 8,
 										};
 		$.ajax( {
 			type: 'GET',
@@ -34,24 +35,23 @@ $(document).ready(function() {
   		data: apiParams,
 			success: function(responseData) {
 				var pages = responseData.query.pages;
-				var htmlHead = '<div class="well">';
-				var htmlTail = '</div>';
 				var wikiArray = [];
+				var html = '<div class="well container text-center">';
 				$.each(pages, function(index, page){
 					var pageid = page.pageid;
 					var title = page.title;
 					var extract = page.extract;
-					wikiArray[index] = {
-						pageid: pageid,
-						title: title,
-						extract: extract,
-					}
-					console.log(wikiArray[index]);
+					// wikiArray[index] = {
+					// 	pageid: pageid,
+					// 	title: title,
+					// 	extract: extract,
+					// }
 					// build HTML for injection into index.html
-					htmlHead += '<p><button><em>' + title + '</em><br>' + extract + '</button>';
+					html += "<p><form action='https://en.wikipedia.org/?curid=" + pageid + "'><button style='width: 100%'><h3>'" + title + '</h3><br><h5>' + extract + '</h5></button></form>';
 					// htmlHead += '<button type="button" class="btn" onclick="location.href=' + https://en.wikipedia.org/wiki/Special:Random'">Random</button>
-					$("#queryResult").html(htmlHead + htmlTail);
 				})	// End of $.each
+				html += "</div>";
+				$("#queryResult").html(html);
 			}	// End of success:
 		});	// End of $.ajax
 	})	// End of Event Listener #queryWiki
