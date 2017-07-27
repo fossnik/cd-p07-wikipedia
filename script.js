@@ -18,11 +18,15 @@ $(document).ready(function() {
 		event.preventDefault(); // prevents page reloading or something
 		var queryTextInput = document.getElementById('queryText').value;
 		var apiParams = { action: 'query',
-										generator: 'search',
-										gsrsearch: queryTextInput,
-										format: 'json',
-										prop: 'extracts|pageimages',
-									};
+											generator: 'search',
+											gsrsearch: queryTextInput,
+											format: 'json',
+											exlimit: 'max',
+											exsentences: 1,
+											exintro: true,
+											explaintext: true,
+											prop: 'extracts',
+										};
 		$.ajax( {
 			type: 'GET',
 			dataType: 'jsonp',
@@ -32,10 +36,17 @@ $(document).ready(function() {
 				var pages = responseData.query.pages;
 				var htmlHead = '<div class="well">';
 				var htmlTail = '</div>';
+				var wikiArray = [];
 				$.each(pages, function(index, page){
+					var pageid = page.pageid;
 					var title = page.title;
 					var extract = page.extract;
-					console.log(page);
+					wikiArray[index] = {
+						pageid: pageid,
+						title: title,
+						extract: extract,
+					}
+					console.log(wikiArray[index]);
 					// build HTML for injection into index.html
 					htmlHead += '<p><button><em>' + title + '</em><br>' + extract + '</button>';
 					// htmlHead += '<button type="button" class="btn" onclick="location.href=' + https://en.wikipedia.org/wiki/Special:Random'">Random</button>
