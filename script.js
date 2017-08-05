@@ -3,16 +3,16 @@ $(document).ready(function() {
 		event.preventDefault(); // prevents page reloading or something
 		var queryTextInput = document.getElementById('queryText').value;
 		var apiParams = { action: 'query',
-											generator: 'search',
-											gsrsearch: queryTextInput,
-											format: 'json',
-											exlimit: 'max',
-											exsentences: 1,
-											exintro: true,
-											explaintext: true,
-											prop: 'extracts',
-											gsrlimit: 8,
-										};
+				generator: 'search',
+				gsrsearch: queryTextInput,
+				format: 'json',
+				exlimit: 'max',
+				exsentences: 1,
+				exintro: true,
+				explaintext: true,
+				prop: 'extracts',
+				gsrlimit: 8,
+				};
 		$.ajax( {
 			type: 'GET',
 			dataType: 'jsonp',
