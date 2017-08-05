@@ -1,19 +1,4 @@
 $(document).ready(function() {
-/*
-	var endpointURL = 'https://en.wikipedia.org/w/api.php';
-	var apiParams = '?format=json\
-&action=query\
-&generator=search\
-&gsrnamespace=0\
-&gsrlimit=10\
-&prop=pageimages|extracts\
-&pilimit=max\
-&exintro\
-&explaintext\
-&exsentences=1\
-&exlimit=max\
-&gsrsearch=';
-*/
 	$("#queryWiki").submit(function(event) {
 		event.preventDefault(); // prevents page reloading or something
 		var queryTextInput = document.getElementById('queryText').value;
@@ -41,12 +26,6 @@ $(document).ready(function() {
 					var pageid = page.pageid;
 					var title = page.title;
 					var extract = page.extract;
-					// wikiArray[index] = {
-					// 	pageid: pageid,
-					// 	title: title,
-					// 	extract: extract,
-					// }
-					// build HTML for injection into index.html
 					html += "<p><form action='https://en.wikipedia.org/?curid=" + pageid + "'><button style='width: 100%'><h3>'" + title + '</h3><br><h5>' + extract + '</h5></button></form>';
 					// htmlHead += '<button type="button" class="btn" onclick="location.href=' + https://en.wikipedia.org/wiki/Special:Random'">Random</button>
 				})	// End of $.each
