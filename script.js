@@ -26,8 +26,12 @@ $(document).ready(function() {
 					var pageid = page.pageid;
 					var title = page.title;
 					var extract = page.extract;
-					html += "<p><form action='https://en.wikipedia.org/?curid=" + pageid + "'><button style='width: 100%'><h3>'" + title + '</h3><br><h5>' + extract + '</h5></button></form>';
-					// htmlHead += '<button type="button" class="btn" onclick="location.href=' + https://en.wikipedia.org/wiki/Special:Random'">Random</button>
+					html += "<p><div onclick=";
+					html += "location.href='https://en.wikipedia.org/?curid=";
+					html += pageid + "'";
+					html += "><button style='width: 100%'><h3>";
+					html += title;
+					html += "</h3><br><h5>" + extract + "</h5></button></div>";
 				})	// End of $.each
 				html += "</div>";
 				$("#queryResult").html(html);
